@@ -1,29 +1,34 @@
-import sys
+from collections import deque as de
 
-n, m = int(input().split())
+def bfs(x,y):
+    queue = de()
+    queue.append((x,y))
 
-start_point_x = n
-start_point_y = 0
+    while queue:
+        x, y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
 
-cnt = 1
+            if nx < 0 or nx >= n or ny < 0 or ny >= m:
+                continue
 
-if n >= m:
-    while(True):
-        if start_point_x - 2 => 0 and start_point_y + 1 <= m:
-            start_point_x -= 2
-            start_point_y += 1
-            cnt += 1
-        elif start_point_x + 2 =< n and start_point_y + 1 <= m:
-            start_point_x += 2
-            start_point_y += 1
-            cnt += 1
-        elif start_point_x - 1 => 0 and start_point_y + 2 <= m:
-            start_point_x -= 1
-            start_point_y += 2
-            cnt += 1
-        elif start_point_x  + 1 =< n  and start_point_y <= m - 2:
-            start_point_x -= 1
-            start_point_y += 2
-            cnt += 1
+            if graph[nx][ny] == 0 :
+                continue
 
-else :
+            if graph[nx][ny] == 1:
+                graph[nx][ny] = graph[x][y] + 1
+                queue.append((nx,ny))
+
+    return graph[n - 1][m - 1]
+
+n, m = map(int,input().split())
+graph = []
+for _ in range(n):
+    graph.append(list(map(int,input())))
+
+dx = [1,0,-1,0]
+dy = [0,1,0,-1]
+
+print(bfs(0,0))
+print(graph)
