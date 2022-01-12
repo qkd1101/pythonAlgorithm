@@ -11,7 +11,8 @@ def solution(participant, completion):
 
 
 
-#Programmers idel solution
+
+#Programmers ideal solution
 import collections
 
 
